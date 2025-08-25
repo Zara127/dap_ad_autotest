@@ -10,6 +10,7 @@ from src.pages.preview_page import PreviewPage
 
 
 class OldCampaignPage(BasePage):
+    """旧版巨量引擎-批量创建页面操作类"""
     def __init__(self, page):
         super().__init__(page)
 
@@ -23,7 +24,7 @@ class OldCampaignPage(BasePage):
         return self.page.url
 
     def create_campaign(self, test_data):
-        """根据测试数据创建广告"""
+        """旧版页面执行批量创建流程"""
 
         #调换1、2两个部分字段的操作顺序，解决切换【推广目的】【营销场景】字段值导致账户清空的问题，避免导致后续数据为空
         #顺序为：先【关联游戏】、再【营销目标与场景】、最后【投放账户】
@@ -72,7 +73,7 @@ class OldCampaignPage(BasePage):
                 filter_type=test_data["filter_type"],
             )
 
-        # 6. 广告创意/广告设置【原生广告投放、创意盒子/素材组、产品名称、产品主图、产品卖点、行动号召】
+        # 6. 广告创意【原生广告投放、创意盒子/素材组、产品名称、产品主图、产品卖点、行动号召】
         if "native_ad" in test_data:
             native_ad=test_data["native_ad"]
         else:
@@ -149,17 +150,6 @@ class OldCampaignPage(BasePage):
         self.page.wait_for_load_state("networkidle") # 等待预览页加载完成
         return PreviewPage(self.page)
 
-    # 跳转页面-返回旧版
-    def click_return_old_version(self):
-        """点击「返回旧版」按钮"""
-        self.click_element(CampaignLocators.RETURN_OLD_VERSION_BUTTON)
-        self.page.wait_for_load_state("networkidle")  # 等待页面加载
-
-    def is_old_version_loaded(self):
-        """验证是否跳转到旧版页面"""
-        # 根据旧版页面特征元素判断（如旧版页面标题、特有元素等）
-        return self.page.is_visible(CampaignLocators.OLD_VERSION_PAGE_TITLE) #todo
-
 
 
     def set_game(self, game):
@@ -179,9 +169,9 @@ class OldCampaignPage(BasePage):
         self.page.get_by_role("button", name="确认").click() # 点击确认
 
     def set_purpose_and_scene(self, purpose, sub_purpose, scene, ad_type, delivery_mode,game):
-        """2.选择营销目标与场景【(推广目标、投放类型)、营销场景、广告类型、投放模式】"""
+        """2.选择营销目标与场景【(推广目的、投放类型)、营销场景、广告类型、投放模式】"""
         self.click_element(CampaignLocators.LIST_PURPOSE_SCENE)
-        # 推广目标
+        # 推广目的
         self.page.locator(CampaignLocators.PURPOSE_SCENE_SELECTOR).filter(has_text=purpose).click()
         # 投放类型/子目标
         if sub_purpose:
@@ -196,7 +186,9 @@ class OldCampaignPage(BasePage):
         #投放模式
         self.page.locator(CampaignLocators.LABEL_LOCATOR).filter(has_text=delivery_mode).click()
 
-        #如果是搜索广告-常规投放，需要选择蓝海流量包
+        #搜索广告-极速智投，新增蓝海关键词选项（非必选）
+
+        #如果是搜索广告-常规投放，需要选择蓝海流量包（必选）
         lanhai_button = self.page.locator(CampaignLocators.LANHAI_BUTTON)
         if lanhai_button.is_visible():
             lanhai_button.click()

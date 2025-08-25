@@ -1,0 +1,13 @@
+test:
+  #临时灰度环境
+  base_url: "http://dap-staging-6.micro-stage.lilith.sh"
+  api_url: "http://dap-staging-6.micro-stage.lilith.sh"
+#  base_url: "http://dap-ad2.micro-dev.lilith.sh"
+#  api_url: "http://dap-ad2.micro-dev.lilith.sh"
+
+  auth:
+    username: dap内部自动化测试
+    password: 20250624@lilith
+  browser:
+    headless: false
+    no_viewport: true

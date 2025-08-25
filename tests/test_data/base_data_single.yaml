@@ -1,68 +1,52 @@
 # 基础数据层 base_data.yaml
 
 #1.投放游戏与账户
-games: ["战火勋章"]
-accounts: ["1752640551709704"]
-
+games:
+  sv_games: ["战火勋章"]  # 短视频+图文场景使用的游戏
+  live_games: ["万龙觉醒"]  # 直播场景使用的游戏
+accounts:
+  sv_accounts: ["1752640551709704"]  # 短视频+图文场景使用的账户
+  live_accounts: ["1814219539456004"]  # 直播场景使用的账户
 #2.营销目标与场景
 purposes:
   - name: "应用推广"
-    sub_types: ["应用下载", "预约下载"]
+    sub_types: ["应用下载"]
   - name: "小程序"
-    sub_types: ["微信小游戏", "微信小程序", "字节小游戏"]
-
-#scenes:
-#  - name: "短视频+图文"
-#    ad_types:
-#      - name: "通投广告"
-#        delivery_modes: ["手动投放", "自动投放"]
-#      - name: "搜索广告"
-#        delivery_modes: ["极速智投", "常规投放"]
-#  - name: "直播"
-#    ad_types:
-#      - name: "通投广告"
-#        delivery_modes: ["手动投放", "自动投放"]
-#      - name: "搜索广告"
-#        delivery_modes: ["常规投放"]
+    sub_types: ["微信小游戏"]
 
 #3.投放内容与目标
 contents:
-  app_types: ['苹果应用','安卓应用']
+  app_types: ['苹果应用']
 #4.投放版位
 placements:
-  positions: ["首选媒体", "通投智选"]
-  media_options: ["今日头条", "西瓜视频", "抖音", "番茄小说", "穿山甲"]
+  positions: ["首选媒体"]
+  media_options: ["今日头条"]
 
 #5.用户定向
 targetings:
-  filter_types: ["不限", "广告", "推广项目", "广告账户", "公司账户","APP"]
-  filter_days: ["当天", "7天", "1个月", "3个月", "6个月","12个月"]
+  filter_types: ["不限"]
+  filter_days: ["当天"]
 
 #6.广告创意/广告设置
-materials:
-#  native_ad: ["关闭", "开启"]  #场景数据中包含
-#  creative_boxes: ["创意盒子1", "创意盒子2", "创意盒子3"]
-#  call_to_actions: ["立即下载", "了解详情", "预约体验", "免费试玩"]
-#  material_forms: ["图片", "视频", "图文混排"]
-  douyin_count: [""]
+
 #7.搜索快投
 search_express:
   bid_factors: [1.0]
-  expansion_options: ["关闭", "开启"]
+  expansion_options: ["开启"]
 
 #8.排期与预算
 budget:
-  time: ["从今天起长期投放", "设置开始和结束日期"]
-  time_periods: ["不限", "指定时间段"]
-  bidding_strategies: ["稳定成本", "最优成本"]
-  budget_types: ["不限", "日预算"]
+  time: ["从今天起长期投放"]
+  time_periods: ["不限"]
+  bidding_strategies: ["稳定成本"]
+  budget_types: ["日预算"]
   daily_budgets: [300]
   ad_budgets: [300]
   ad_bids: [0.1]
 
 #9.项目生成方式与标签
 generation:
-  generation_types: ["按受众", "按受众、创意"]
-  campaign_types: ["拉新", "回流", "混投"]
-  campaign_status: ["关闭", "开启"]
-  ad_status: ["关闭", "开启"]
+  generation_types: ["按受众"]
+  campaign_types: ["拉新"]
+  campaign_status: ["关闭"]
+  ad_status: ["关闭"]

@@ -1,0 +1,275 @@
+# 场景1：短视频+图文 + 通投广告 + 手动 + 原生关闭
+scenario_short_video_promote_manual_native_off:
+  description: "短视频+图文，通投广告，手动投放，原生广告关闭"
+  game: "战火勋章"
+  account: "1752640551709704"
+  purpose: "应用推广"
+  scene:
+    - 短视频+图文
+    - 通投广告
+    - 手动投放
+  app: "WARPATH中国-iOS"
+  conversion: "测试转化目标"
+  place: "信息流"
+  media: "抖音"
+  targeting:
+    package: "test-勿用"
+    platform: "APP"
+  materials:
+    type: "原生广告"
+    ad_creative: "短视频素材"
+    text: "大家都在玩的游戏"
+    landing_page: "https://example.com"
+    native_ad: False  # 原生广告关闭
+  budget: 300
+  bid: 0.1
+  generation: "按受众、创意"
+  tags: ["拉新", "混投"]
+
+# 场景2：短视频+图文 + 通投广告 + 手动 + 原生开启
+scenario_short_video_promote_manual_native_on:
+  description: "短视频+图文，通投广告，手动投放，原生广告开启"
+  game: "战火勋章"
+  account: "1752640551709704"
+  purpose: "应用下载"
+  scene:
+    - 短视频+图文
+    - 通投广告
+    - 手动投放
+  app: "WARPATH中国-iOS"
+  conversion: "测试转化目标"
+  place: "信息流"
+  media: "抖音"
+  targeting:
+    package: "test-勿用"
+    platform: "APP"
+  materials:
+    type: "原生广告"
+    ad_creative: "短视频素材"
+    text: "大家都在玩的游戏"
+    landing_page: "https://example.com"
+    native_ad: True  # 原生广告开启
+  budget: 300
+  bid: 0.1
+  generation: "按受众、创意"
+  tags: ["拉新", "混投"]
+
+# 场景3：短视频+图文 + 搜索广告 + 常规投放 + 原生关闭
+scenario_short_video_search_normal_native_off:
+  description: "短视频+图文，搜索广告，常规投放，原生广告关闭"
+  game: "战火勋章"
+  account: "1752640551709704"
+  purpose: "应用下载"
+  scene:
+    - 短视频+图文
+    - 搜索广告
+    - 常规投放
+  app: "WARPATH中国-iOS"
+  conversion: "测试转化目标"
+  place: "搜索结果页"
+  media: "头条"
+  targeting:
+    package: "test-常规"
+    platform: "APP"
+  materials:
+    type: "原生广告"
+    ad_creative: "短视频素材"
+    text: "热门游戏推荐"
+    landing_page: "https://example.com"
+    native_ad: False  # 原生广告关闭
+  budget: 500
+  bid: 0.2
+  generation: "按创意、受众"
+  tags: ["搜索推广", "常规投放"]
+
+# 场景4：短视频+图文 + 搜索广告 + 常规投放 + 原生开启
+scenario_short_video_search_normal_native_on:
+  description: "短视频+图文，搜索广告，常规投放，原生广告开启"
+  game: "战火勋章"
+  account: "1752640551709704"
+  purpose: "应用下载"
+  scene:
+    - 短视频+图文
+    - 搜索广告
+    - 常规投放
+  app: "WARPATH中国-iOS"
+  conversion: "测试转化目标"
+  place: "搜索结果页"
+  media: "头条"
+  targeting:
+    package: "test-常规"
+    platform: "APP"
+  materials:
+    type: "原生广告"
+    ad_creative: "短视频素材"
+    text: "热门游戏推荐"
+    landing_page: "https://example.com"
+    native_ad: True  # 原生广告开启
+  budget: 500
+  bid: 0.2
+  generation: "按创意、受众"
+  tags: ["搜索推广", "常规投放"]
+
+# 场景5：短视频+图文 + 搜索广告 + 极速智投 + 原生关闭
+scenario_short_video_search_express_native_off:
+  description: "短视频+图文，搜索广告，极速智投，原生广告关闭"
+  game: "战火勋章"
+  account: "1752640551709704"
+  purpose: "应用下载"
+  scene:
+    - 短视频+图文
+    - 搜索广告
+    - 极速智投
+  app: "WARPATH中国-iOS"
+  conversion: "测试转化目标"
+  place: "搜索结果页"
+  media: "头条"
+  targeting:
+    package: "test-极速"
+    platform: "APP"
+  materials:
+    type: "原生广告"
+    ad_creative: "短视频素材"
+    text: "热门游戏推荐"
+    landing_page: "https://example.com"
+    native_ad: False  # 原生广告关闭
+  budget: 800
+  bid: 0.3
+  generation: "按创意、受众"
+  tags: ["搜索推广", "极速智投"]
+
+# 场景6：短视频+图文 + 搜索广告 + 极速智投 + 原生开启
+scenario_short_video_search_express_native_on:
+  description: "短视频+图文，搜索广告，极速智投，原生广告开启"
+  game: "战火勋章"
+  account: "1752640551709704"
+  purpose: "应用下载"
+  scene:
+    - 短视频+图文
+    - 搜索广告
+    - 极速智投
+  app: "WARPATH中国-iOS"
+  conversion: "测试转化目标"
+  place: "搜索结果页"
+  media: "头条"
+  targeting:
+    package: "test-极速"
+    platform: "APP"
+  materials:
+    type: "原生广告"
+    ad_creative: "短视频素材"
+    text: "热门游戏推荐"
+    landing_page: "https://example.com"
+    native_ad: True  # 原生广告开启
+  budget: 800
+  bid: 0.3
+  generation: "按创意、受众"
+  tags: ["搜索推广", "极速智投"]
+
+# 场景7：直播 + 通投广告 + 投放模式不限 + 直播素材
+scenario_live_promote_live_material:
+  description: "直播，通投广告，投放模式不限，直播素材"
+  game: "战火勋章"
+  account: "1752640551709704"
+  purpose: "应用推广"
+  scene:
+    - 直播
+    - 通投广告
+    - 投放模式不限
+  app: "WARPATH中国-安卓"
+  conversion: "注册转化"
+  place: "信息流"
+  media: "抖音"
+  targeting:
+    package: "test-live"
+    platform: "APP"
+  materials:
+    type: "直播素材"
+    ad_creative: "直播素材组"
+    text: "热门游戏直播"
+    landing_page: "https://live.example.com"
+  budget: 1000
+  bid: 0.5
+  generation: "按创意、受众"
+  tags: ["直播推广", "通投广告"]
+
+# 场景8：直播 + 通投广告 + 投放模式不限 + 广告素材
+scenario_live_promote_ad_material:
+  description: "直播，通投广告，投放模式不限，广告素材"
+  game: "战火勋章"
+  account: "1752640551709704"
+  purpose: "应用推广"
+  scene:
+    - 直播
+    - 通投广告
+    - 投放模式不限
+  app: "WARPATH中国-安卓"
+  conversion: "注册转化"
+  place: "信息流"
+  media: "抖音"
+  targeting:
+    package: "test-live"
+    platform: "APP"
+  materials:
+    type: "广告素材"
+    ad_creative: "广告素材组"
+    text: "热门游戏推荐"
+    landing_page: "https://live.example.com"
+  budget: 1000
+  bid: 0.5
+  generation: "按创意、受众"
+  tags: ["直播推广", "通投广告"]
+
+# 场景9：直播 + 搜索广告 + 常规投放 + 直播素材
+scenario_live_search_normal_live_material:
+  description: "直播，搜索广告，常规投放，直播素材"
+  game: "战火勋章"
+  account: "1752640551709704"
+  purpose: "应用推广"
+  scene:
+    - 直播
+    - 搜索广告
+    - 常规投放
+  app: "WARPATH中国-安卓"
+  conversion: "注册转化"
+  place: "搜索结果页"
+  media: "头条"
+  targeting:
+    package: "test-live"
+    platform: "APP"
+  materials:
+    type: "直播素材"
+    ad_creative: "直播素材组"
+    text: "热门游戏直播"
+    landing_page: "https://live.example.com"
+  budget: 1200
+  bid: 0.6
+  generation: "按创意、受众"
+  tags: ["直播推广", "搜索广告"]
+
+# 场景10：直播 + 搜索广告 + 常规投放 + 广告素材
+scenario_live_search_normal_ad_material:
+  description: "直播，搜索广告，常规投放，广告素材"
+  game: "战火勋章"
+  account: "1752640551709704"
+  purpose: "应用推广"
+  scene:
+    - 直播
+    - 搜索广告
+    - 常规投放
+  app: "WARPATH中国-安卓"
+  conversion: "注册转化"
+  place: "搜索结果页"
+  media: "头条"
+  targeting:
+    package: "test-live"
+    platform: "APP"
+  materials:
+    type: "广告素材"
+    ad_creative: "广告素材组"
+    text: "热门游戏推荐"
+    landing_page: "https://live.example.com"
+  budget: 1200
+  bid: 0.6
+  generation: "按创意、受众"
+  tags: ["直播推广", "搜索广告"]
