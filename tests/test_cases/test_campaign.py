@@ -22,10 +22,10 @@ class TestCampaignCreate:
     @allure.story("批量创建测试")
     @pytest.mark.parametrize(
         "scenario",
-        # scenarios["short_video_scenarios"]+   #todo
+        scenarios["short_video_scenarios"]+
         scenarios["live_scenarios"],
         ids=[s["name"] for s in
-             # scenarios["short_video_scenarios"] +    #todo
+             scenarios["short_video_scenarios"] +
              scenarios["live_scenarios"]]
     )
     def test_create_campaign(self, campaign_page, scenario):

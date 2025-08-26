@@ -27,12 +27,12 @@ dap-ad-autotest/
 │   └── └── scenarios.yaml       # 场景字段数据
 │   │
 │   ├── test_cases/                      
-│   │   ├── test_login.py        # 
-│   │   ├── test_home.py         # 
+│   │   ├── test_login.py        
+│   │   ├── test_home.py         
 │   │   ├── test_campaign.py     # 新版
 │   │   ├── test_campaign_old.py # 旧版
-│   │   ├── test_preview.py      # 旧版
-│   └── └── test_adlist.py       # 
+│   │   ├── test_preview.py      
+│   └── └── test_adlist.py       
 │ 
 ├── reports/                     # 测试报告
 │   ├── allure-report/           # Allure报告
