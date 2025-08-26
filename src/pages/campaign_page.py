@@ -509,6 +509,10 @@ class CampaignPage(BasePage):
                     (CampaignLocators.TEXT, 2)  # 文案
                 ]
                 self.set_material_count(materials_to_set)
+
+                #补充：如果选择投放抖音号可见，则选择抖音号
+                self.select_douyin_account(game, material_type)
+
                 #2.选择素材【视频：1，图片：3，组图：4，音乐库：2，文案库：2】
                 materials_to_select = [
                     (CampaignLocators.VIDEOBUTTON, "测试", 2),  # 视频

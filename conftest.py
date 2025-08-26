@@ -54,6 +54,7 @@ def capture_screenshot_on_failure(request, authenticated_context: BrowserContext
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S") # 时间戳（精确到秒，避免同一用例多次失败截图覆盖）
         screenshot_path = SCREENSHOT_DIR / f"{case_name}_{timestamp}.png" # 最终截图路径
 
+
         # 3. 获取当前活跃页面（从 authenticated_context 中获取最后一个打开的页面），避免因多页面切换导致截图错页
         page = authenticated_context.pages[-1] if authenticated_context.pages else None
         if not page:
