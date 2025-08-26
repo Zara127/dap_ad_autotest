@@ -25,9 +25,6 @@ class HomePage(BasePage):
 
     def click_create_btn(self, platform):
         """点击去创建按钮，进入广告创建页面"""
-        # self.page.get_by_role("menuitem", name="广告",exact=True).click() #点击导航栏“广告”
-        # platform_card = self.page.get_by_text(platform) #获取对应的广告渠道
-        # platform_card.locator("//div[contains(text(),'去创建')]").click()  # 点击去创建
         with self.page.expect_popup() as page2_info:
             self.page.get_by_text("去创建").first.click()
         page2 = page2_info.value

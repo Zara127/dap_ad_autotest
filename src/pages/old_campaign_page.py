@@ -3,7 +3,7 @@
 import re
 from itertools import product
 from click.decorators import CmdType
-from conftest import campaign_page
+# from conftest import campaign_page
 from src.core.base_page import BasePage
 from src.core.locators import CampaignLocators
 from src.pages.preview_page import PreviewPage
@@ -13,11 +13,14 @@ class OldCampaignPage(BasePage):
     """旧版巨量引擎-批量创建页面操作类"""
     def __init__(self, page):
         super().__init__(page)
+        self.page = page
 
     def is_loaded(self):
         """验证页面是否加载完成"""
-        # return self.page.is_visible(CampaignLocators.PAGE_TITLE)
-        return self.page.title()==CampaignLocators.PAGE_TITLE_OLD
+        # 等待关键元素出现
+        self.page.wait_for_selector(CampaignLocators.PAGE_TITLE_OLD)
+
+        return self.page.is_visible(CampaignLocators.PAGE_TITLE_OLD)
 
     def get_current_page_url(self):
         """获取当前页面 URL，用于判断跳转"""
@@ -151,7 +154,6 @@ class OldCampaignPage(BasePage):
         return PreviewPage(self.page)
 
 
-
     def set_game(self, game):
         """1.1选择关联游戏"""
         self.page.locator(CampaignLocators.GAME_ACCOUNT_SELECTOR).get_by_role("textbox", name="请选择").click()
@@ -199,20 +201,20 @@ class OldCampaignPage(BasePage):
     def set_content_and_target(self, app_type,star_task=None):
         """3.投放内容与目标【应用类型、推广应用、转化目标】"""
         self.click_element(CampaignLocators.LIST_CONTENT_TARGET)
-        # 非必须字段：关联星广联投任务＜（＾－＾）＞[营销场景十一 选择该字段，会影响后续广告/创意设置]
-        if star_task:
-            self.click_element(CampaignLocators.TASK_SELECTOR_BUTTON) # 选择关联星广联投任务
-            self.page.get_by_text("战火勋章25年6月星广联投素材-常规剪辑赛道-芦鸣").click()  # 设置固定选一个任务
-            self.page.get_by_role("button", name="确认").click()  # 确认按钮
+        # 非必须字段：关联星广联投任务[新版：营销场景十一 选择该字段，会影响后续广告/创意设置] 旧版不需要
+        # if star_task:
+        #     self.click_element(CampaignLocators.TASK_SELECTOR_BUTTON) # 选择关联星广联投任务
+        #     self.page.get_by_text("战火勋章25年6月星广联投素材-常规剪辑赛道-芦鸣").click()  # 设置固定选一个任务
+        #     self.page.get_by_role("button", name="确认").click()  # 确认按钮
         #选择应用类型
         self.page.locator(CampaignLocators.LABEL_LOCATOR).filter(has_text=app_type).click()
-        # 推广应用是否固定选择？？？ 暂时按照文字匹配选择第一个 ＜（＾－＾）＞
+        # 推广应用：按照文字匹配选择第一个
         self.page.locator(CampaignLocators.APP_SELECTOR).locator(CampaignLocators.APP_SELECTOR_BOX).click()
         if app_type == "安卓应用":
             self.page.get_by_text("中国-安卓",exact=False).first.click()
         else:
             self.page.locator("text=/.*中国-(ios|苹果|iOS).*/i").click()
-        # 选择具体的转化目标 【可以自己新建test转化目标{test_zst}，也可以选择带有公测的】
+        # 选择具体的转化目标 【可以自己新建test转化目标{test_zst}】
         if self.page.locator(CampaignLocators.CONVERSION_BUTTON).is_visible():
             self.click_element(CampaignLocators.CONVERSION_BUTTON)
             #如果在搜索前可见“test_zst”，则直接点击；否则再进行搜索选择
@@ -238,19 +240,12 @@ class OldCampaignPage(BasePage):
     def set_targeting(self, filter_type, filter_days=None):  #targeting_num参数
         """5.用户定向【定向盒子、过滤已转化、过滤时间】"""
         self.click_element(CampaignLocators.LIST_USER_TARGETING)
-        #TODO 定向盒子[定向盒子的数量、选择] ？？？
-        # 【搜索test选择】＜（＾－＾）＞
-        # if targeting_num == 1:
-        #     # 若只有一个定向盒子，则直接点击选择定向包
-        #     self.click_element(CampaignLocators.TARGETING_PACK_SELECTOR) #点击选择定向包
-        # self.page.get_by_role("button",name="取消").click()
         self.click_element(CampaignLocators.TARGETING_PACK_SELECTOR)  # 点击选择定向包
         # 如果在搜索前可见“test_zst”，则直接选择；否则再进行搜索选择
         if self.page.get_by_title("dap内部自动化测试").is_visible():
             self.page.get_by_title("dap内部自动化测试").click()
         else:
             self.fill_input(CampaignLocators.TARGETING_SEARCH_INPUT,"test_zst") #输入“test_zst”
-            # self.page.locator(CampaignLocators.TARGETING_SEARCH_BUTTON).nth(2).click() #点击搜索按钮
             self.page.locator(CampaignLocators.TARGETING_SEARCH_INPUT).press("Enter") #回车搜索
             self.page.get_by_role("row", name=re.compile("test")).first.locator("use").click()  # 选择匹配到的第一个
         self.page.get_by_role("button", name="确认").click() #确认按钮
@@ -299,15 +294,11 @@ class OldCampaignPage(BasePage):
             self.page.locator(CampaignLocators.LABEL_LOCATOR).filter(has_text=material_type).click()
 
 
-        #TODO
-        # 创意盒子/素材组【现有页面和需求文档上的不一致，暂无法按照需求文档上的编写】 ＜（＾－＾）＞
-        # 创意盒子一般在选择的时候可以输入"测试"进行选择；没有的话其他的也可以选；也可以在创意中心中自己创建
-        # todo: 可以更改dap创意与抖音素材选择的逻辑：
+        # dap创意与抖音素材选择的逻辑：
         #  先判断抖音创意是否可见，可见则选抖音素材，且不需要再选择dap素材，不可见则进一步判断dap创意是否可见；
         #  dap创意可见则选择dap素材，不可见则不需要选择。
         #选择dap创意[直播-素材形式为直播素材时不需要选择dap创意][营销场景十一：选择关联星广联投任务后，也不需要选择dap创意]
         #【直接选择第一个素材】
-        # if material_type == None and material_type != "直播素材":
         if self.page.locator(CampaignLocators.ADMATERIAL_BOX).is_visible(): #若dap创意可见，则进行选择
             self.click_element(CampaignLocators.ADMATERIAL_BOX) #点击dap创意按钮
             dap_dialog = self.page.locator(CampaignLocators.DAP_DIALOG_SELECTOR)  # 定位DAP创意弹窗容器
@@ -320,24 +311,6 @@ class OldCampaignPage(BasePage):
                 first_creative.click()
             else:
                 print("dap创意中暂无数据")
-            # self.fill_input(CampaignLocators.ADMATERIAL_BOX_SEARCH_INPUT, "测试") #输入测试选择素材
-            # self.page.locator(CampaignLocators.ADMATERIAL_BOX_SEARCH_INPUT).press("Enter") #回车搜索
-            # self.page.wait_for_load_state("networkidle")
-            # admaterial_search_first = self.page.locator(CampaignLocators.ADMATERIAL_BOX_SEARCH_RESULT_FIRST).first
-            # if admaterial_search_first.is_visible():
-            #     self.page.locator(CampaignLocators.ADMATERIAL_BOX_SEARCH_RESULT_FIRST).click()  # 点击搜索后指定固定素材
-            # else:
-            #     self.fill_input(CampaignLocators.ADMATERIAL_BOX_SEARCH_INPUT, "公测")
-            #     self.page.locator(CampaignLocators.ADMATERIAL_BOX_SEARCH_INPUT).press("Enter")  # 回车搜索
-            #     self.page.wait_for_load_state("networkidle")
-            #     admaterial_search_first = self.page.locator(CampaignLocators.ADMATERIAL_BOX_SEARCH_RESULT_FIRST).first
-            #     if admaterial_search_first.is_visible(): #搜索{公测}
-            #         self.page.locator(CampaignLocators.ADMATERIAL_BOX_SEARCH_RESULT_FOURTH).click()  # 点击搜索后指定固定素材
-            #     else: #搜索{测试/公测}后没有结果，则在主页任选一个
-            #         self.fill_input(CampaignLocators.ADMATERIAL_BOX_SEARCH_INPUT, "")
-            #         self.page.locator(CampaignLocators.ADMATERIAL_BOX_SEARCH_INPUT).press("Enter")  # 回车搜索
-            #         self.page.wait_for_load_state("networkidle")
-            #         self.page.get_by_text("公测-测新").first.click()  #固定选择
             self.page.get_by_role("button", name="确认").click()
         #选择抖音号创意/抖音创意[注：目前页面有两种形式ui]
         douyin_a = self.page.locator(CampaignLocators.DOUYIN_BOX_A)
@@ -356,7 +329,7 @@ class OldCampaignPage(BasePage):
             self.click_element(CampaignLocators.LANHAI_KEY_SELECTOR)
             self.page.get_by_text("优选 游戏下载 预估消耗（元）").click() #任意选一个
 
-        # TODO 如果应用类型为安卓应用，则需要选择落地页【test】  ＜（＾－＾）＞
+        # 如果应用类型为安卓应用，则需要选择落地页【test】
         if land_page:
             self.click_element(CampaignLocators.LAND_PAGE_SELECT_BUTTON) #点击选择落地页按钮
             self.fill_input(CampaignLocators.LAND_PAGE_SEARCH_INPUT,"test")
@@ -373,14 +346,6 @@ class OldCampaignPage(BasePage):
         #添加鼠标滚动
         self.page.mouse.wheel(0, 100)
 
-        # TODO产品名称、产品主图  检验是否与game相符合【当素材形式为直播素材时，没有这两个字段】
-        if material_type == None or material_type != "直播素材":
-            # product_name = self.page.locator("#adMaterial").get_by_role("textbox").first.text_content()
-            # assert product_name == game,"产品名称与关联游戏名称不符"
-            product_img = self.page.locator(CampaignLocators.ADMATERIAL_IMG).get_by_role("img")
-            game_img = self.page.locator(CampaignLocators.GAME_IMG)
-            assert product_img.get_attribute("src") == game_img.get_attribute("src"),"产品主图与关联游戏图片不符"
-            # 产品卖点、行动号召  默认即可 不需要操作
 
 
     def set_budget(self, time, time_period, bidding_strategy, ad_budget, ad_bid, daily_budget=None,budget_type=None):
@@ -415,13 +380,6 @@ class OldCampaignPage(BasePage):
     def set_search_express(self, bid_factor, expansion):
         """8.设置搜索快投"""
         self.click_element(CampaignLocators.LIST_SEARCH)
-        #TODO 关键词 非必需字段需要吗？怎么选？【搜索关键字 test】【可选可不选】
-        # self.click_element(CampaignLocators.KEY_BAG_BUTTON) #点击选择关键词包按钮
-        # key_bag_name = "test"
-        # self.fill_input(CampaignLocators.KEY_BAG_SEARCH, key_bag_name) #输出关键词包名搜索
-        # self.page.get_by_role("row", name=key_bag_name).locator("span").nth(1).click() #勾选
-        # self.page.get_by_role("button", name="确认").click()  # 确认按钮
-        # self.page.get_by_role("button", name="取消").click()  # 取消按钮
         #出价系数
         self.fill_input(CampaignLocators.BID_FACTOR_INPUT,str(bid_factor))
         #定向拓展
@@ -447,11 +405,6 @@ class OldCampaignPage(BasePage):
         # self.click_element(CampaignLocators.CAMPAIGN_TAG) #点击项目标签＋号
         # self.page.get_by_text("项目生成方式 按受众 按受众、创意 投放类型 拉新 回流 混投 项目标签").click() #点击空白处
 
-        #TODO 目前页面没有这两个字段
-        # 项目启停设置
-        # self.page.locator(CampaignLocators.LABEL_LOCATOR).filter(has_text=campaign_status).click()
-        # 广告启停设置
-        # self.page.locator(CampaignLocators.LABEL_LOCATOR).filter(has_text=ad_status).click()
 
 
 
@@ -484,4 +437,4 @@ class OldCampaignPage(BasePage):
         """刷新页面"""
         self.page.reload()
         self.page.wait_for_load_state("networkidle")
-        return self
+        return self.page

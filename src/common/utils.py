@@ -305,7 +305,7 @@ def generate_test_combinations(scenario: Dict[str, Any],
 #     #             media_options.append(list(combo))
 #     #     base_fields["media_options"] = media_options
 #
-# #todo 确定不需要设置特殊媒体时，这里可以直接不进行处理，
+# #注：确定不需要设置特殊媒体时，这里可以直接不进行处理，
 #     # 4. 处理媒体选项（首选媒体时直接选择全部媒体）
 #     # if base_fields["placement"][0] == "首选媒体":
 #     #     # 直接选择所有媒体选项，而不是生成组合

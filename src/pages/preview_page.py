@@ -26,7 +26,7 @@ class PreviewPage(BasePage):
         return self.page.is_visible(PreviewLocators.PREVIEW_TITLE)
 
 
-    def click_create_ad_button(self):
+    def click_create_ad_button(self):  #注：如果会新建页面的话，需要修改返回page2
         """点击预览页「创建广告」按钮，跳转广告列表页"""
         self.click_element(PreviewLocators.CREATE_BUTTON) #点击创建广告按钮
         self.page.wait_for_load_state("networkidle")

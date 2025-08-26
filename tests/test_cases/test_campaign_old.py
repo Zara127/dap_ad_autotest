@@ -14,23 +14,6 @@ scenarios = load_yaml("tests/test_data/scenarios.yaml")
 class TestOldVersionBatchCreate:
     """旧版页面测试用例，使用 OldCampaignPage 驱动"""
 
-    @pytest.fixture(scope="function")
-    def old_campaign_page(self, campaign_page):
-        """ fixture 初始化旧版页面（打开旧版链接）"""
-        # 1. 确保当前在新版页面
-        assert campaign_page.is_loaded(), "新版页面加载失败"
-        # 2. 点击返回旧版按钮
-        with allure.step("点击「返回旧版」按钮"):
-            page = campaign_page.click_return_old_version()
-        return OldCampaignPage(page)  # 初始化旧版操作类
-
-    @allure.story("旧版页面加载验证")
-    def test_old_version_load(self, old_campaign_page):
-        """验证旧版页面是否正确加载"""
-        assert old_campaign_page.is_old_version_loaded(), "旧版页面未加载或定位器失效"
-        current_url = campaign_page.get_current_url_after_click()
-        assert "advertise-2/toutiao2/batch-create" in current_url, f"跳转URL不符合预期，实际URL: {current_url}"  # todo 旧版链接
-
     @allure.story("旧版批量创建主流程")
     @pytest.mark.parametrize(
         "scenario",

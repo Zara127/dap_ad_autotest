@@ -87,9 +87,9 @@ class TestAdListPage:
     #     account = ad_list_context["account"]
     #     game = ad_list_context["game"]
 
-    #     # ad_name = ad_list_context["ad_name"]    #todo 在预览页可以获得广告名称，保存在上下文中         可以直接用DAPNBZDHCS代替
-    #     # project_name = ad_list_context["project_name"] #todo 在预览页可以获得项目名称，保存在上下文中  可以直接用DAPNBZDHCS代替
-    #     # account_name = ad_list_context["account_name"] #todo 在预览页可以获得账户名称，保存在上下文中
+    #     # ad_name = ad_list_context["ad_name"]    #在预览页可以获得广告名称，保存在上下文中
+    #     # project_name = ad_list_context["project_name"] #在预览页可以获得项目名称，保存在上下文中
+    #     # account_name = ad_list_context["account_name"] #在预览页可以获得账户名称，保存在上下文中
     #
     #     with allure.step("验证按照当前账户进行筛选，最新广告在列表中"):
     #         ad_list_page.filter_by_current_user(game, account)

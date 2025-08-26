@@ -3,9 +3,10 @@
 import re
 from itertools import product
 from click.decorators import CmdType
-from conftest import campaign_page
+# from conftest import campaign_page
 from src.core.base_page import BasePage
 from src.core.locators import CampaignLocators
+from src.pages.old_campaign_page import OldCampaignPage
 from src.pages.preview_page import PreviewPage
 
 
@@ -13,6 +14,7 @@ class CampaignPage(BasePage):
     """新版巨量引擎-批量创建页面操作类"""
     def __init__(self, page):
         super().__init__(page)
+        self.page = page
 
     def is_loaded(self):
         """验证页面是否加载完成"""
@@ -159,13 +161,18 @@ class CampaignPage(BasePage):
     # 跳转页面-返回旧版
     def click_return_old_version(self):
         """点击「返回旧版」按钮"""
-        self.click_element(CampaignLocators.RETURN_OLD_VERSION_BUTTON)
-        self.page.wait_for_load_state("networkidle")  # 等待页面加载
+        with self.page.expect_popup() as page2_info:
+            self.click_element(CampaignLocators.RETURN_OLD_VERSION_BUTTON)
+            self.page.wait_for_load_state("networkidle")  # 等待页面加载
+        page2 = page2_info.value
+        page2.wait_for_load_state("networkidle")
+        # 返回广告创建页面实例
+        return OldCampaignPage(page2)
 
     def is_old_version_loaded(self):
         """验证是否跳转到旧版页面"""
         # 根据旧版页面特征元素判断（如旧版页面标题、特有元素等）
-        return self.page.is_visible(CampaignLocators.OLD_VERSION_PAGE_TITLE) #todo
+        return self.page.is_visible(CampaignLocators.OLD_VERSION_PAGE_TITLE)
 
 
 
@@ -661,4 +668,4 @@ class CampaignPage(BasePage):
         """刷新页面"""
         self.page.reload()
         self.page.wait_for_load_state("networkidle")
-        return self
+        return self.page

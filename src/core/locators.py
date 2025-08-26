@@ -109,6 +109,7 @@ class CampaignLocators:
     TEXT_SUMMARY_INPUT = "input[placeholder='至少49个字符']"
     TEXT_SUMMARY = "button:has-text('摘要库')"
     TEXT_TEST = "testtesttesttesttesttesttesttesttesttesttesttesttest"
+    LANHAI_KEY_SELECTOR = "input[placeholder='请选择蓝海关键词']"
 
 
 #素材组
@@ -182,9 +183,8 @@ class CampaignLocators:
     PREVIEW_BUTTON = "button:has-text('预览广告')"
 
     # 11. 返回旧版按钮
-    RETURN_OLD_VERSION_BUTTON = "button:has-text('返回旧版')"
-    OLD_VERSION_PAGE_TITLE = "" #todo
-    OLD_VERSION_CREATE_BUTTON = "" #todo
+    RETURN_OLD_VERSION_BUTTON = "text=返回旧版"
+    OLD_VERSION_PAGE_TITLE = "text=巨量引擎/批量"
 
 
 class PreviewLocators:
