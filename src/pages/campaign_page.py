@@ -599,7 +599,7 @@ class CampaignPage(BasePage):
     def set_search_express(self, bid_factor, expansion):
         """8.设置搜索快投"""
         self.click_element(CampaignLocators.LIST_SEARCH)
-        #关键词 非必需字段需要吗？怎么选？【搜索关键字 test】【可选可不选】
+        #关键词 非必需字段【搜索关键字 test】【可选可不选】
         # self.click_element(CampaignLocators.KEY_BAG_BUTTON) #点击选择关键词包按钮
         # key_bag_name = "test"
         # self.fill_input(CampaignLocators.KEY_BAG_SEARCH, key_bag_name) #输出关键词包名搜索

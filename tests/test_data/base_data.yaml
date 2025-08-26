@@ -1,5 +1,5 @@
 # 基础数据层 base_data.yaml
-# base_data.yaml 新增内容
+
 resource_mapping:  # 资源映射表：明确不同场景+目标对应的游戏/账户键名
   - scene: "直播"
     purpose: "*"  # "*" 表示匹配所有推广目标

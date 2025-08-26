@@ -41,9 +41,9 @@ dap-ad-autotest/
 │   ├── screenshots/             # 失败截图
 │   └── videos/                  # 执行录像(可选)
 │
-├── requirements.txt             # Python依赖
+├── conftest.py                  # Pytest Fixture（全局共享资源）
 ├── pytest.ini                   # Pytest配置
-├── conftest.py                  # pytest.ini 配套文件
+├── requirements.txt             # 依赖
 └── README.md                    
 
 # 执行测试用例
@@ -51,7 +51,8 @@ pytest tests/test_cases/test_campaign.py -s -v --alluredir=reports/allure-result
 pytest tests/test_cases/test_campaign_old.py -s -v --alluredir=reports/allure-results
 
 # 生成allure报告到指定目录下（不自动打开）
-allure generate allure-results -o reports/allure-report --clean 
+allure generate reports/allure-results -o reports/allure-report --clean
+allure open reports/allure-report #打开报告
 
 # 生成allure报告到指定目录下（默认打开浏览器）
 allure serve reports/allure-results
