@@ -29,7 +29,8 @@ class TestCampaignCreate:
              scenarios["live_scenarios"]]
     )
     def test_create_campaign(self, campaign_page, scenario):
-        """创建广告,生成所有组合"""
+        """创建广告,只取每个场景的第一个组合"""
+        # 注：next() 每个场景只取第一个组合
         test_data = next(generate_test_combinations(scenario, base_data))
         case_id = f"{test_data['scenario_name']}"
         # 1.执行广告创建
@@ -53,3 +54,28 @@ class TestCampaignCreate:
         #     assert ad_list_page.is_loaded(), "广告列表页面加载失败"
         #     assert "list" in ad_list_page.get_current_page_url(), "未跳转到广告列表页"
 
+
+
+
+    # @allure.story("批量创建测试")
+    # @pytest.mark.parametrize(
+    #     "scenario",
+    #     scenarios["short_video_scenarios"] +
+    #     scenarios["live_scenarios"],
+    #     ids=[s["name"] for s in
+    #          scenarios["short_video_scenarios"] +
+    #          scenarios["live_scenarios"]]
+    # )
+    # def test_create_campaign(self, campaign_page, scenario):
+    #     """创建广告,每个营销场景生成所有组合"""
+    #     # list()获取所有测试组合
+    #     test_combinations = list(generate_test_combinations(scenario, base_data))
+    #
+    #     # 遍历每个测试组合
+    #     for test_data in test_combinations:
+    #         case_id = f"{test_data['scene_name']}_{test_data['app_type']}"  #可以添加其他重要基础字段数据
+    #         # 1.执行广告创建
+    #         with allure.step(f"执行组合测试: {case_id}"):
+    #             allure.dynamic.title(case_id)
+    #             allure.dynamic.description(f"测试组合: {test_data}")
+    #             campaign_page.create_campaign(test_data)
