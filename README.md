@@ -1,4 +1,5 @@
 # 项目结构
+```
 dap-ad-autotest/
 ├── configs/                     # 配置文件
 │   └── test.yaml                # 测试环境配置
@@ -45,19 +46,27 @@ dap-ad-autotest/
 ├── pytest.ini                   # Pytest配置
 ├── requirements.txt             # 依赖
 └── README.md                    
+```
 
 # 执行测试用例
+```bash
 pytest tests/test_cases/test_campaign.py -s -v --alluredir=reports/allure-results
 pytest tests/test_cases/test_campaign_old.py -s -v --alluredir=reports/allure-results
+```
 
-# 生成allure报告到指定目录下（不自动打开）
+# 生成allure报告（不自动打开）
+```bash
 allure generate reports/allure-results -o reports/allure-report --clean
 allure open reports/allure-report #打开报告
+```
 
-# 生成allure报告到指定目录下（默认打开浏览器）
+# 生成allure报告（默认打开浏览器）
+```bash
 allure serve reports/allure-results
+```
 
 # 生成html报告
+```bash
 pytest tests/test_cases/test_campaign.py -s -v --html=reports/html/report.html
-pytest tests/test_cases/test_campaign_old.py -s -v --html=reports/html/report.html
-
+pytest tests/test_cases/test_campaign_old.py -s -v --html=reports/html/report.html   
+```
