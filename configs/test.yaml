@@ -1,10 +1,10 @@
 test:
   #临时灰度环境
-  base_url: "http://dap-staging-6.micro-stage.lilith.sh"
+  base_url: "xxx"
 
   auth:
-    username: dap内部自动化测试
-    password: 20250624@lilith
+    username: xxx
+    password: xxx
 
   browser:
     type: "chromium"
